@@ -1,0 +1,22 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+  #热部署生效
+  devtools:
+    restart:
+      enabled: true
+#consul注册中心地址
+  cloud:
+    consul:
+      host: 192.168.190.132
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        #设置consul的健康检查
+        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}:/actuator/health
+
+
